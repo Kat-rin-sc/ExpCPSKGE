@@ -1,0 +1,8 @@
+
+*.ipynb
+*.csv
+*.pkl
+*.log
+*.ckpt
+*.nq
+*Archive*

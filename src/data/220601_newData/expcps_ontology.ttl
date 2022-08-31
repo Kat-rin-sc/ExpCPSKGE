@@ -1,0 +1,1100 @@
+@prefix : <http://expcps.link/vocab#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://expcps.link/vocab#> .
+
+<http://expcps.link/vocab#> rdf:type owl:Ontology ;
+                             <http://purl.org/dc/terms/created> "2020-06-22"^^xsd:date ;
+                             <http://purl.org/dc/terms/creator> <https://pebbie.org/webid.ttl#me> ;
+                             <http://purl.org/dc/terms/description> "This ontology is for describing explainable Cyber-Physical Systems (CPS) uses SOSA (Sensor, Observation, Sample, and Actuator)."@en ;
+                             <http://purl.org/dc/terms/license> <http://www.w3.org/Consortium/Legal/2015/copyright-software-and-document> ;
+                             <http://purl.org/dc/terms/rights> "Copyright 2020 TU Wien." ;
+                             <http://purl.org/dc/terms/title> "Explainable Cyber-Physical Systems (ExpCPS) Ontology"@en ;
+                             <http://purl.org/vocab/vann/preferredNamespacePrefix> "expcps" ;
+                             <http://purl.org/vocab/vann/preferredNamespaceUri> "http://expcps.link/vocab#" .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://expcps.link/vocab#previousValue
+:previousValue rdf:type owl:AnnotationProperty ;
+               <https://w3id.org/function/ontology#type> :JSONLiteral .
+
+
+###  http://expcps.link/vocab#signDirection
+:signDirection rdf:type owl:AnnotationProperty ;
+               rdfs:comment "sign of value change direction, -1 for decreasing, 1 for increasing" .
+
+
+###  http://expcps.link/vocab#thresholdOperator
+:thresholdOperator rdf:type owl:AnnotationProperty ;
+                   rdfs:comment "comparison operator as string literal \"<\", \">\", \"=\"" .
+
+
+###  http://expcps.link/vocab#thresholdValue
+:thresholdValue rdf:type owl:AnnotationProperty ;
+                <https://w3id.org/function/ontology#type> xsd:decimal .
+
+
+###  http://purl.org/dc/terms/created
+<http://purl.org/dc/terms/created> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/creator
+<http://purl.org/dc/terms/creator> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/description
+<http://purl.org/dc/terms/description> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/license
+<http://purl.org/dc/terms/license> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/rights
+<http://purl.org/dc/terms/rights> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/title
+<http://purl.org/dc/terms/title> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/vocab/vann/preferredNamespacePrefix
+<http://purl.org/vocab/vann/preferredNamespacePrefix> rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/vocab/vann/preferredNamespaceUri
+<http://purl.org/vocab/vann/preferredNamespaceUri> rdf:type owl:AnnotationProperty .
+
+
+###  http://schema.org/domainIncludes
+<http://schema.org/domainIncludes> rdf:type owl:AnnotationProperty .
+
+
+###  http://schema.org/rangeIncludes
+<http://schema.org/rangeIncludes> rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#definition
+<http://www.w3.org/2004/02/skos/core#definition> rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#example
+<http://www.w3.org/2004/02/skos/core#example> rdf:type owl:AnnotationProperty .
+
+
+###  http://xmlns.com/foaf/0.1/name
+<http://xmlns.com/foaf/0.1/name> rdf:type owl:AnnotationProperty .
+
+
+###  https://w3id.org/function/ontology#executes
+<https://w3id.org/function/ontology#executes> rdf:type owl:AnnotationProperty .
+
+
+###  https://w3id.org/function/ontology#expects
+<https://w3id.org/function/ontology#expects> rdf:type owl:AnnotationProperty .
+
+
+###  https://w3id.org/function/ontology#predicate
+<https://w3id.org/function/ontology#predicate> rdf:type owl:AnnotationProperty .
+
+
+###  https://w3id.org/function/ontology#required
+<https://w3id.org/function/ontology#required> rdf:type owl:AnnotationProperty .
+
+
+###  https://w3id.org/function/ontology#type
+<https://w3id.org/function/ontology#type> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://expcps.link/vocab#JSONLiteral
+:JSONLiteral rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://expcps.link/vocab#actuates
+:actuates rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :interacts ;
+          rdfs:domain <http://www.w3.org/ns/sosa/Actuator> ;
+          rdfs:range <http://www.w3.org/ns/sosa/ActuatableProperty> .
+
+
+###  http://expcps.link/vocab#causalityContext
+:causalityContext rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Argument ;
+                  rdfs:range :Causality ;
+                  rdfs:label "has applied rule"@en .
+
+
+###  http://expcps.link/vocab#causedBy
+:causedBy rdf:type owl:ObjectProperty ;
+          rdfs:domain :Event ;
+          rdfs:range :Event ;
+          <http://schema.org/domainIncludes> :Event ;
+          <http://schema.org/rangeIncludes> :Event ;
+          rdfs:comment "Relation between Instance of Event denoting the causality"@en ;
+          rdfs:isDefinedBy <http://expcps.link/vocab#> ;
+          rdfs:label "caused by"@en ;
+          <http://www.w3.org/2004/02/skos/core#definition> ""@en ;
+          <http://www.w3.org/2004/02/skos/core#example> ""@en .
+
+
+###  http://expcps.link/vocab#conditionFormulation
+:conditionFormulation rdf:type owl:ObjectProperty ;
+                      rdfs:domain :CausalityCondition ;
+                      rdfs:range :CausalityFormulation ;
+                      rdfs:comment "specify which language used to formulate the condition of causality"@en ;
+                      rdfs:isDefinedBy <http://expcps.link/vocab#> ;
+                      rdfs:label "condition language" ;
+                      <http://www.w3.org/2004/02/skos/core#definition> ""@en ;
+                      <http://www.w3.org/2004/02/skos/core#example> """expcps:ConnectedCondition a expcps:CausalityCondition ;
+	expcps:conditionFormulation expcps:SPARQL ."""@en .
+
+
+###  http://expcps.link/vocab#context
+:context rdf:type owl:ObjectProperty ;
+         rdfs:domain :Causality ;
+         rdfs:range :CausalityCondition ;
+         rdfs:comment "Relation between Causality to another Causality Condition"@en ;
+         rdfs:isDefinedBy <http://expcps.link/vocab#> ;
+         rdfs:label "context restriction"@en ;
+         <http://www.w3.org/2004/02/skos/core#definition> ""@en ;
+         <http://www.w3.org/2004/02/skos/core#example> ""@en .
+
+
+###  http://expcps.link/vocab#dependsOn
+:dependsOn rdf:type owl:ObjectProperty ;
+           rdfs:domain :Device ;
+           rdfs:range :Device ;
+           <http://schema.org/domainIncludes> :Device ;
+           <http://schema.org/rangeIncludes> :Device ;
+           rdfs:comment "Relation between Device based on the causality relationships of the observed properties"@en ;
+           rdfs:isDefinedBy <http://expcps.link/vocab#> ;
+           rdfs:label "depends on"@en ;
+           <http://www.w3.org/2004/02/skos/core#definition> ""@en ;
+           <http://www.w3.org/2004/02/skos/core#example> ""@en .
+
+
+###  http://expcps.link/vocab#explanationFor
+:explanationFor rdf:type owl:ObjectProperty ;
+                owl:inverseOf :hasExplanation ;
+                rdfs:domain :Explanation ;
+                rdfs:range :Event ;
+                rdfs:label "is explanation for"@en .
+
+
+###  http://expcps.link/vocab#generatedAt
+:generatedAt rdf:type owl:ObjectProperty ;
+             rdfs:domain :Event ;
+             rdfs:range :Device ;
+             <http://schema.org/domainIncludes> :Event ;
+             <http://schema.org/rangeIncludes> :Device ,
+                                               <http://www.w3.org/ns/sosa/Actuator> ,
+                                               <http://www.w3.org/ns/sosa/Sensor> ;
+             rdfs:comment "Relation between event and device"@en ;
+             rdfs:isDefinedBy <http://expcps.link/vocab#> ;
+             rdfs:label "generated at"@en ;
+             <http://www.w3.org/2004/02/skos/core#definition> ""@en ;
+             <http://www.w3.org/2004/02/skos/core#example> ""@en .
+
+
+###  http://expcps.link/vocab#generatedBy
+:generatedBy rdf:type owl:ObjectProperty ;
+             owl:inverseOf :generates ;
+             rdfs:domain :Event ;
+             rdfs:range :EventAnnotator ;
+             <http://schema.org/domainIncludes> :Device ,
+                                                <http://www.w3.org/ns/sosa/Actuator> ,
+                                                <http://www.w3.org/ns/sosa/Sensor> ;
+             <http://schema.org/rangeIncludes> <http://www.w3.org/ns/sosa/FeatureOfInterest> ;
+             rdfs:comment "Relation between event and event annotator"@en ;
+             rdfs:isDefinedBy <http://expcps.link/vocab#> ;
+             rdfs:label "generated by"@en ;
+             <http://www.w3.org/2004/02/skos/core#definition> ""@en ;
+             <http://www.w3.org/2004/02/skos/core#example> ""@en .
+
+
+###  http://expcps.link/vocab#generates
+:generates rdf:type owl:ObjectProperty ;
+           rdfs:domain :EventAnnotator ;
+           rdfs:range :Event ;
+           rdfs:comment "Relates Event annotator with the generated event"@en ;
+           rdfs:isDefinedBy <http://expcps.link/vocab#> ;
+           rdfs:label "generates"@en ;
+           <http://www.w3.org/2004/02/skos/core#definition> ""@en ;
+           <http://www.w3.org/2004/02/skos/core#example> "expcps:OverloadAlarm expcps:generates expcps:OverloadAlarm ."@en .
+
+
+###  http://expcps.link/vocab#hasConnection
+:hasConnection rdf:type owl:ObjectProperty ,
+                        owl:SymmetricProperty ;
+               rdfs:domain <http://www.w3.org/ns/sosa/FeatureOfInterest> ;
+               rdfs:range <http://www.w3.org/ns/sosa/FeatureOfInterest> ;
+               rdfs:comment "Symmetric relation between Feature to another Feature when location is different"@en ;
+               rdfs:isDefinedBy <http://expcps.link/vocab#> ;
+               rdfs:label "has connection"@en ;
+               <http://www.w3.org/2004/02/skos/core#definition> ""@en ;
+               <http://www.w3.org/2004/02/skos/core#example> ""@en .
+
+
+###  http://expcps.link/vocab#hasExplanation
+:hasExplanation rdf:type owl:ObjectProperty ;
+                rdfs:domain :Event ;
+                rdfs:range :Explanation ;
+                rdfs:label "has explanation"@en .
+
+
+###  http://expcps.link/vocab#hasParameter
+:hasParameter rdf:type owl:ObjectProperty ;
+              rdfs:domain :ParameterList ;
+              rdfs:range <https://w3id.org/function/ontology#Parameter> ;
+              rdfs:comment "unordered representation of expected parameters of a function" ;
+              rdfs:label "has parameter"@en .
+
+
+###  http://expcps.link/vocab#hasPotentialCause
+:hasPotentialCause rdf:type owl:ObjectProperty ;
+                   rdfs:domain :Argument ;
+                   rdfs:range :Event ;
+                   rdfs:comment "associate the event that is suspected as cause of the event that is being explained in the argument or explanation"@en ;
+                   rdfs:label "has potential cause"@en .
+
+
+###  http://expcps.link/vocab#hasReason
+:hasReason rdf:type owl:ObjectProperty ;
+           rdfs:domain :Explanation ;
+           rdfs:range :Argument ;
+           rdfs:label "has reason"@en .
+
+
+###  http://expcps.link/vocab#hasReference
+:hasReference rdf:type owl:ObjectProperty ;
+              rdfs:domain :Event ;
+              rdfs:range :Data ;
+              <http://schema.org/domainIncludes> :Event ;
+              <http://schema.org/rangeIncludes> <http://www.w3.org/ns/sosa/Observation> ;
+              rdfs:comment "Reference to the observation that this event is based on"@en ;
+              rdfs:isDefinedBy <http://expcps.link/vocab#> ;
+              rdfs:label "has reference"@en ;
+              <http://www.w3.org/2004/02/skos/core#definition> ""@en ;
+              <http://www.w3.org/2004/02/skos/core#example> ""@en .
+
+
+###  http://expcps.link/vocab#hasSubArgument
+:hasSubArgument rdf:type owl:ObjectProperty ;
+                rdfs:domain :Argument ;
+                rdfs:range :Argument ;
+                rdfs:label "has sub argument"@en .
+
+
+###  http://expcps.link/vocab#interacts
+:interacts rdf:type owl:ObjectProperty ;
+           rdfs:domain :Device ;
+           rdfs:range :Property .
+
+
+###  http://expcps.link/vocab#locatedAt
+:locatedAt rdf:type owl:ObjectProperty ,
+                    owl:TransitiveProperty ;
+           rdfs:domain <http://www.w3.org/ns/sosa/FeatureOfInterest> ;
+           rdfs:range <http://www.w3.org/ns/sosa/FeatureOfInterest> ;
+           <http://schema.org/domainIncludes> <http://www.w3.org/ns/sosa/FeatureOfInterest> ;
+           <http://schema.org/rangeIncludes> <http://www.w3.org/ns/sosa/FeatureOfInterest> ;
+           rdfs:comment "Asymmetric Relation between Feature to another Feature when sharing the same location"@en ;
+           rdfs:isDefinedBy <http://expcps.link/vocab#> ;
+           rdfs:label "located at"@en ;
+           <http://www.w3.org/2004/02/skos/core#definition> ""@en ;
+           <http://www.w3.org/2004/02/skos/core#example> ""@en .
+
+
+###  http://expcps.link/vocab#observes
+:observes rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :interacts ;
+          rdfs:domain <http://www.w3.org/ns/sosa/Sensor> ;
+          rdfs:range <http://www.w3.org/ns/sosa/ObservableProperty> ;
+          rdfs:comment "Relation between Device and the Property it makes an observation"@en ;
+          rdfs:isDefinedBy <http://expcps.link/vocab#> ;
+          rdfs:label "observes"@en ;
+          <http://www.w3.org/2004/02/skos/core#definition> ""@en ;
+          <http://www.w3.org/2004/02/skos/core#example> ""@en .
+
+
+###  http://expcps.link/vocab#operatedOn
+:operatedOn rdf:type owl:ObjectProperty ;
+            rdfs:domain :EventAnnotator ;
+            rdfs:range :Property ;
+            <http://schema.org/domainIncludes> :Device ,
+                                               <http://www.w3.org/ns/sosa/Actuator> ,
+                                               <http://www.w3.org/ns/sosa/Sensor> ;
+            <http://schema.org/rangeIncludes> <http://www.w3.org/ns/sosa/FeatureOfInterest> ;
+            rdfs:comment "Relation bet"@en ;
+            rdfs:isDefinedBy <http://expcps.link/vocab#> ;
+            rdfs:label "operated on"@en ;
+            <http://www.w3.org/2004/02/skos/core#definition> ""@en ;
+            <http://www.w3.org/2004/02/skos/core#example> ""@en .
+
+
+###  http://expcps.link/vocab#placedAt
+:placedAt rdf:type owl:ObjectProperty ;
+          rdfs:domain :Device ;
+          rdfs:range <http://www.w3.org/ns/sosa/FeatureOfInterest> ;
+          <http://schema.org/domainIncludes> :Device ,
+                                             <http://www.w3.org/ns/sosa/Actuator> ,
+                                             <http://www.w3.org/ns/sosa/Sensor> ;
+          <http://schema.org/rangeIncludes> <http://www.w3.org/ns/sosa/FeatureOfInterest> ;
+          rdfs:comment "Relation between Device and Feature of Interest"@en ;
+          rdfs:isDefinedBy <http://expcps.link/vocab#> ;
+          rdfs:label "placed at"@en ;
+          <http://www.w3.org/2004/02/skos/core#definition> ""@en ;
+          <http://www.w3.org/2004/02/skos/core#example> ""@en .
+
+
+###  http://expcps.link/vocab#produces
+:produces rdf:type owl:ObjectProperty ;
+          rdfs:domain :Device ;
+          rdfs:range :Data .
+
+
+###  http://expcps.link/vocab#source
+:source rdf:type owl:ObjectProperty ;
+        rdfs:domain :Causality ;
+        rdfs:range :Property ;
+        rdfs:comment "Relation between Causality to another Property on the cause part"@en ;
+        rdfs:isDefinedBy <http://expcps.link/vocab#> ;
+        rdfs:label "source"@en ;
+        <http://www.w3.org/2004/02/skos/core#definition> ""@en ;
+        <http://www.w3.org/2004/02/skos/core#example> ""@en .
+
+
+###  http://expcps.link/vocab#target
+:target rdf:type owl:ObjectProperty ;
+        rdfs:domain :Causality ;
+        rdfs:range :Property ;
+        rdfs:comment "Relation between Causality to another Property on the effect part"@en ;
+        rdfs:isDefinedBy <http://expcps.link/vocab#> ;
+        rdfs:label "target"@en ;
+        <http://www.w3.org/2004/02/skos/core#definition> ""@en ;
+        <http://www.w3.org/2004/02/skos/core#example> ""@en .
+
+
+###  http://www.w3.org/ns/ssn/hasProperty
+<http://www.w3.org/ns/ssn/hasProperty> rdf:type owl:ObjectProperty ;
+                                       owl:inverseOf <http://www.w3.org/ns/ssn/isPropertyOf> ;
+                                       rdfs:domain <http://www.w3.org/ns/sosa/FeatureOfInterest> ;
+                                       rdfs:range :Property ;
+                                       rdfs:label "has property"@en .
+
+
+###  http://www.w3.org/ns/ssn/isPropertyOf
+<http://www.w3.org/ns/ssn/isPropertyOf> rdf:type owl:ObjectProperty ;
+                                        rdfs:domain :Property ;
+                                        rdfs:range <http://www.w3.org/ns/sosa/FeatureOfInterest> ;
+                                        rdfs:label "is property of"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://expcps.link/vocab#conditionPattern
+:conditionPattern rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :CausalityCondition ;
+                  rdfs:comment "Relation between Causality and the condition that constraints the plausibility of inference using the causal pattern"@en ;
+                  rdfs:isDefinedBy <http://expcps.link/vocab#> ;
+                  rdfs:label "on condition"@en ;
+                  <http://www.w3.org/2004/02/skos/core#definition> ""@en ;
+                  <http://www.w3.org/2004/02/skos/core#example> ""@en .
+
+
+###  http://expcps.link/vocab#hasWeightScore
+:hasWeightScore rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Device ,
+                            :Event ,
+                            :EventAnnotator ;
+                rdfs:range xsd:decimal ;
+                rdfs:comment "the numerical weight used for determining the contribution of a device information or event annotator confidence to the explanation generation process"@en ;
+                rdfs:isDefinedBy <http://expcps.link/vocab#> ;
+                rdfs:label "weight score"@en ;
+                <http://www.w3.org/2004/02/skos/core#definition> ""@en ;
+                <http://www.w3.org/2004/02/skos/core#example> "<> expcps:hasWeightScore 1.0 ."@en .
+
+
+###  http://expcps.link/vocab#numLastValues
+:numLastValues rdf:type owl:DatatypeProperty ;
+               rdfs:domain :EventAnnotator ;
+               rdfs:range xsd:integer ;
+               rdfs:comment "the number of values/observations required to trigger event annotator"@en ;
+               rdfs:isDefinedBy <http://expcps.link/vocab#> ;
+               rdfs:label "num last values"@en ;
+               <http://www.w3.org/2004/02/skos/core#definition> ""@en ;
+               <http://www.w3.org/2004/02/skos/core#example> "<> expcps:hasWeightScore 1.0 ."@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://expcps.link/vocab#ApplicationServer
+:ApplicationServer rdf:type owl:Class ;
+                   rdfs:subClassOf <http://www.w3.org/ns/sosa/FeatureOfInterest> .
+
+
+###  http://expcps.link/vocab#Argument
+:Argument rdf:type owl:Class .
+
+
+###  http://expcps.link/vocab#Battery
+:Battery rdf:type owl:Class ;
+         rdfs:subClassOf <http://www.w3.org/ns/sosa/FeatureOfInterest> .
+
+
+###  http://expcps.link/vocab#BlackoutEvent
+:BlackoutEvent rdf:type owl:Class ;
+               rdfs:subClassOf :PowerGridEvent .
+
+
+###  http://expcps.link/vocab#Building
+:Building rdf:type owl:Class ;
+          rdfs:subClassOf <http://www.w3.org/ns/sosa/FeatureOfInterest> .
+
+
+###  http://expcps.link/vocab#Cable
+:Cable rdf:type owl:Class ;
+       rdfs:subClassOf <http://www.w3.org/ns/sosa/FeatureOfInterest> .
+
+
+###  http://expcps.link/vocab#CalendarEvent
+:CalendarEvent rdf:type owl:Class ;
+               rdfs:subClassOf :Event ;
+               rdfs:comment "Events related to calendar" .
+
+
+###  http://expcps.link/vocab#Causality
+:Causality rdf:type owl:Class ;
+           rdfs:comment "Causal pattern between two properties"@en ;
+           rdfs:isDefinedBy <http://expcps.link/vocab#> ;
+           rdfs:label "Causality"@en ;
+           <http://www.w3.org/2004/02/skos/core#definition> ""@en ;
+           <http://www.w3.org/2004/02/skos/core#example> """test:Causality_1 a expcps:Causality ;
+    expcps:source <http://expcps.link/expcps/property#ACTIVE-POWER-3P> ;
+    expcps:target <http://expcps.link/expcps/property#LOADING> ;
+	expcps:context expcps:ConnectedCondition ."""@en .
+
+
+###  http://expcps.link/vocab#CausalityCondition
+:CausalityCondition rdf:type owl:Class ;
+                    rdfs:subClassOf <https://w3id.org/function/ontology#Function> ;
+                    rdfs:comment "Condition or Context-specific situation which constraints the applicability of causality rule"@en ;
+                    rdfs:isDefinedBy <http://expcps.link/vocab#> ;
+                    rdfs:label "Causality condition"@en ;
+                    <http://www.w3.org/2004/02/skos/core#definition> ""@en ;
+                    <http://www.w3.org/2004/02/skos/core#example> "expcps:ConnectedCondition a expcps:CausalityCondition ."@en .
+
+
+###  http://expcps.link/vocab#CausalityFormulation
+:CausalityFormulation rdf:type owl:Class ;
+                      rdfs:comment "representation language to express causality relationship" .
+
+
+###  http://expcps.link/vocab#ClearskyEvent
+:ClearskyEvent rdf:type owl:Class ;
+               rdfs:subClassOf :WeatherEvent .
+
+
+###  http://expcps.link/vocab#CommunicationChannel
+:CommunicationChannel rdf:type owl:Class ;
+                      rdfs:subClassOf <http://www.w3.org/ns/sosa/FeatureOfInterest> .
+
+
+###  http://expcps.link/vocab#Data
+:Data rdf:type owl:Class ;
+      rdfs:comment "Data produced by sensing/actuating device. sensor produces observation, actuator produces actuation" .
+
+
+###  http://expcps.link/vocab#DataGridEvent
+:DataGridEvent rdf:type owl:Class ;
+               rdfs:subClassOf :Event ;
+               rdfs:comment "Events related to data communications between elements in the power grid" .
+
+
+###  http://expcps.link/vocab#Device
+:Device rdf:type owl:Class ;
+        rdfs:comment "Physical instrument which observes or intervene/actuate a (physical) property"@en ;
+        rdfs:isDefinedBy <http://expcps.link/vocab#> ;
+        rdfs:label "Device"@en ;
+        <http://www.w3.org/2004/02/skos/core#definition> ""@en ;
+        <http://www.w3.org/2004/02/skos/core#example> """expcps:Trafo_Loading a sosa:Sensor, expcps:Device ;
+    expcps:observes expcps:LOADING ;
+    expcps:placedAt test:Trafo ."""@en .
+
+
+###  http://expcps.link/vocab#EVChargingStation
+:EVChargingStation rdf:type owl:Class ;
+                   rdfs:subClassOf <http://www.w3.org/ns/sosa/FeatureOfInterest> .
+
+
+###  http://expcps.link/vocab#EconomicEvent
+:EconomicEvent rdf:type owl:Class ;
+               rdfs:subClassOf :Event .
+
+
+###  http://expcps.link/vocab#Event
+:Event rdf:type owl:Class ;
+       rdfs:comment ""@en ;
+       rdfs:isDefinedBy <http://expcps.link/vocab#> ;
+       rdfs:label "Event"@en ;
+       <http://www.w3.org/2004/02/skos/core#definition> ""@en ;
+       <http://www.w3.org/2004/02/skos/core#example> """expcps:OverloadEvent a owl:Class ;
+    rdfs:subClassOf expcps:Event ."""@en .
+
+
+###  http://expcps.link/vocab#EventAnnotator
+:EventAnnotator rdf:type owl:Class ;
+                rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                  owl:onProperty :generates ;
+                                  owl:allValuesFrom :Event
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :operatedOn ;
+                                  owl:allValuesFrom :Property
+                                ] ;
+                rdfs:comment "External component to annotate Event from Observation of a Property"@en ;
+                rdfs:isDefinedBy <http://expcps.link/vocab#> ;
+                rdfs:label "Event annotator"@en ;
+                <http://www.w3.org/2004/02/skos/core#definition> ""@en ;
+                <http://www.w3.org/2004/02/skos/core#example> """expcps:OverloadAlarm a expcps:EventAnnotator, fno:Execution ;
+    fno:executes expcps:SimpleThreshold ;
+    expcps:generates expcps:OverloadEvent ;
+    expcps:thresholdValue \"60.0\"^^xsd:decimal ;
+    expcps:thresholdOperator \">\" ;
+    expcps:numLastValues 1 ;
+    expcps:operatedOn expcps:LOADING ."""@en .
+
+
+###  http://expcps.link/vocab#Explanation
+:Explanation rdf:type owl:Class .
+
+
+###  http://expcps.link/vocab#FlexibilityEvent
+:FlexibilityEvent rdf:type owl:Class ;
+                  rdfs:subClassOf :DataGridEvent .
+
+
+###  http://expcps.link/vocab#GridConnector
+:GridConnector rdf:type owl:Class ;
+               rdfs:subClassOf <http://www.w3.org/ns/sosa/FeatureOfInterest> .
+
+
+###  http://expcps.link/vocab#HolidayEvent
+:HolidayEvent rdf:type owl:Class ;
+              rdfs:subClassOf :CalendarEvent .
+
+
+###  http://expcps.link/vocab#MarketEvent
+:MarketEvent rdf:type owl:Class ;
+             rdfs:subClassOf :EconomicEvent ;
+             rdfs:comment "Events related to market (price rise/drop) of related goods or services" .
+
+
+###  http://expcps.link/vocab#OvercastEvent
+:OvercastEvent rdf:type owl:Class ;
+               rdfs:subClassOf :WeatherEvent .
+
+
+###  http://expcps.link/vocab#OverloadEvent
+:OverloadEvent rdf:type owl:Class ;
+               rdfs:subClassOf :PowerGridEvent .
+
+
+###  http://expcps.link/vocab#ParameterList
+:ParameterList rdf:type owl:Class ;
+               rdfs:subClassOf rdf:List .
+
+
+###  http://expcps.link/vocab#PowerGridEvent
+:PowerGridEvent rdf:type owl:Class ;
+                rdfs:subClassOf :Event ;
+                rdfs:comment "Events related to power grid i.e. electricity" .
+
+
+###  http://expcps.link/vocab#Property
+:Property rdf:type owl:Class ;
+          rdfs:comment "An abstract or physical property of a particular feature that can be measured/actuated"@en ;
+          rdfs:isDefinedBy <http://expcps.link/vocab#> ;
+          rdfs:label "Property"@en ;
+          <http://www.w3.org/2004/02/skos/core#definition> ""@en ;
+          <http://www.w3.org/2004/02/skos/core#example> "expcps:LOADING a expcps:Property ."@en .
+
+
+###  http://expcps.link/vocab#RainyEvent
+:RainyEvent rdf:type owl:Class ;
+            rdfs:subClassOf :WeatherEvent .
+
+
+###  http://expcps.link/vocab#SPARQL
+:SPARQL rdf:type owl:Class ;
+        rdfs:subClassOf :CausalityFormulation .
+
+
+###  http://expcps.link/vocab#SolarPanel
+:SolarPanel rdf:type owl:Class ;
+            rdfs:subClassOf <http://www.w3.org/ns/sosa/FeatureOfInterest> .
+
+
+###  http://expcps.link/vocab#Trafo
+:Trafo rdf:type owl:Class ;
+       rdfs:subClassOf <http://www.w3.org/ns/sosa/FeatureOfInterest> .
+
+
+###  http://expcps.link/vocab#VoltageDropEvent
+:VoltageDropEvent rdf:type owl:Class ;
+                  rdfs:subClassOf :PowerGridEvent .
+
+
+###  http://expcps.link/vocab#Weather
+:Weather rdf:type owl:Class ;
+         rdfs:subClassOf <http://www.w3.org/ns/sosa/FeatureOfInterest> .
+
+
+###  http://expcps.link/vocab#WeatherEvent
+:WeatherEvent rdf:type owl:Class ;
+              rdfs:subClassOf :Event .
+
+
+###  http://expcps.link/vocab#WeekendEvent
+:WeekendEvent rdf:type owl:Class ;
+              rdfs:subClassOf :CalendarEvent .
+
+
+###  http://expcps.link/vocab#WindyEvent
+:WindyEvent rdf:type owl:Class ;
+            rdfs:subClassOf :WeatherEvent .
+
+
+###  http://purl.org/vocommons/voaf#Vocabulary
+<http://purl.org/vocommons/voaf#Vocabulary> rdf:type owl:Class .
+
+
+###  http://www.w3.org/1999/02/22-rdf-syntax-ns#List
+rdf:List rdf:type owl:Class .
+
+
+###  http://www.w3.org/2000/01/rdf-schema#Literal
+rdfs:Literal rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/sosa/ActuatableProperty
+<http://www.w3.org/ns/sosa/ActuatableProperty> rdf:type owl:Class ;
+                                               rdfs:subClassOf :Property .
+
+
+###  http://www.w3.org/ns/sosa/Actuation
+<http://www.w3.org/ns/sosa/Actuation> rdf:type owl:Class ;
+                                      rdfs:subClassOf :Data ;
+                                      owl:disjointWith <http://www.w3.org/ns/sosa/Observation> .
+
+
+###  http://www.w3.org/ns/sosa/Actuator
+<http://www.w3.org/ns/sosa/Actuator> rdf:type owl:Class ;
+                                     rdfs:subClassOf :Device ;
+                                     owl:disjointWith <http://www.w3.org/ns/sosa/Sensor> .
+
+
+###  http://www.w3.org/ns/sosa/FeatureOfInterest
+<http://www.w3.org/ns/sosa/FeatureOfInterest> rdf:type owl:Class .
+
+
+###  http://www.w3.org/ns/sosa/ObservableProperty
+<http://www.w3.org/ns/sosa/ObservableProperty> rdf:type owl:Class ;
+                                               rdfs:subClassOf :Property .
+
+
+###  http://www.w3.org/ns/sosa/Observation
+<http://www.w3.org/ns/sosa/Observation> rdf:type owl:Class ;
+                                        rdfs:subClassOf :Data .
+
+
+###  http://www.w3.org/ns/sosa/Sensor
+<http://www.w3.org/ns/sosa/Sensor> rdf:type owl:Class ;
+                                   rdfs:subClassOf :Device .
+
+
+###  http://xmlns.com/foaf/0.1/Agent
+<http://xmlns.com/foaf/0.1/Agent> rdf:type owl:Class .
+
+
+###  https://w3id.org/function/ontology#Execution
+<https://w3id.org/function/ontology#Execution> rdf:type owl:Class .
+
+
+###  https://w3id.org/function/ontology#Function
+<https://w3id.org/function/ontology#Function> rdf:type owl:Class .
+
+
+###  https://w3id.org/function/ontology#Parameter
+<https://w3id.org/function/ontology#Parameter> rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://expcps.link/expcps/property#ACTIVE-POWER-3P
+<http://expcps.link/expcps/property#ACTIVE-POWER-3P> rdf:type owl:NamedIndividual ,
+                                                              <http://www.w3.org/ns/sosa/ObservableProperty> .
+
+
+###  http://expcps.link/expcps/property#CHARGE
+<http://expcps.link/expcps/property#CHARGE> rdf:type owl:NamedIndividual ,
+                                                     <http://www.w3.org/ns/sosa/ObservableProperty> .
+
+
+###  http://expcps.link/expcps/property#CONNECTION-QUALITY
+<http://expcps.link/expcps/property#CONNECTION-QUALITY> rdf:type owl:NamedIndividual ,
+                                                                 <http://www.w3.org/ns/sosa/ObservableProperty> .
+
+
+###  http://expcps.link/expcps/property#LOADING
+<http://expcps.link/expcps/property#LOADING> rdf:type owl:NamedIndividual ,
+                                                      <http://www.w3.org/ns/sosa/ObservableProperty> .
+
+
+###  http://expcps.link/expcps/property#OPERATIONAL-SWITCH
+<http://expcps.link/expcps/property#OPERATIONAL-SWITCH> rdf:type owl:NamedIndividual ,
+                                                                 <http://www.w3.org/ns/sosa/ObservableProperty> .
+
+
+###  http://expcps.link/expcps/property#STATE-OF-CHARGE
+<http://expcps.link/expcps/property#STATE-OF-CHARGE> rdf:type owl:NamedIndividual ,
+                                                              <http://www.w3.org/ns/sosa/ObservableProperty> .
+
+
+###  http://expcps.link/expcps/property#VOLTAGE-3P
+<http://expcps.link/expcps/property#VOLTAGE-3P> rdf:type owl:NamedIndividual ,
+                                                         <http://www.w3.org/ns/sosa/ObservableProperty> .
+
+
+###  http://expcps.link/vocab#
+<http://expcps.link/vocab#> rdf:type owl:NamedIndividual ,
+                                     <http://purl.org/vocommons/voaf#Vocabulary> .
+
+
+###  http://expcps.link/vocab#Battery
+:Battery rdf:type owl:NamedIndividual ;
+         <http://www.w3.org/ns/ssn/hasProperty> <http://expcps.link/expcps/property#CHARGE> .
+
+
+###  http://expcps.link/vocab#BlackoutAlarm
+:BlackoutAlarm rdf:type owl:NamedIndividual ,
+                        :EventAnnotator ,
+                        <https://w3id.org/function/ontology#Execution> ;
+               :generates :BlackoutEvent ;
+               :operatedOn <http://expcps.link/expcps/property#OPERATIONAL-SWITCH> ;
+               :numLastValues 2 ;
+               :previousValue "true"^^:JSONLiteral ;
+               <https://w3id.org/function/ontology#executes> :ValueChange .
+
+
+###  http://expcps.link/vocab#BlackoutEvent
+:BlackoutEvent rdf:type owl:NamedIndividual .
+
+
+###  http://expcps.link/vocab#Building
+:Building rdf:type owl:NamedIndividual ;
+          <http://www.w3.org/ns/ssn/hasProperty> <http://expcps.link/expcps/property#ACTIVE-POWER-3P> .
+
+
+###  http://expcps.link/vocab#Cable
+:Cable rdf:type owl:NamedIndividual ;
+       <http://www.w3.org/ns/ssn/hasProperty> <http://expcps.link/expcps/property#LOADING> .
+
+
+###  http://expcps.link/vocab#Cloud2IrradianceCausality
+:Cloud2IrradianceCausality rdf:type owl:NamedIndividual ,
+                                    :Causality ;
+                           :source :CloudCover ;
+                           :target :SolarIrradiance .
+
+
+###  http://expcps.link/vocab#CloudCover
+:CloudCover rdf:type owl:NamedIndividual ,
+                     <http://www.w3.org/ns/sosa/ObservableProperty> .
+
+
+###  http://expcps.link/vocab#CommunicationChannel
+:CommunicationChannel rdf:type owl:NamedIndividual ;
+                      <http://www.w3.org/ns/ssn/hasProperty> <http://expcps.link/expcps/property#CONNECTION-QUALITY> .
+
+
+###  http://expcps.link/vocab#ConnectedCondition
+:ConnectedCondition rdf:type owl:NamedIndividual ,
+                             :CausalityCondition ;
+                    :conditionFormulation :SPARQL ;
+                    :conditionPattern """PREFIX expcps: <http://expcps.link/vocab#> #
+SELECT DISTINCT ?src_dev ?tgt_dev FROM <http://expcps.link/topology/settlement> WHERE { 
+	?src_dev expcps:placedAt ?src_feat. 
+	?tgt_dev expcps:placedAt ?tgt_feat. 
+	?src_feat expcps:hasConnection+ ?tgt_feat. 
+	?tgt_feat a <http://expcps.link/expcps/feature#LV-TRANSFORMER> .	
+}
+""" .
+
+
+###  http://expcps.link/vocab#CurrentValueParam
+:CurrentValueParam rdf:type owl:NamedIndividual ,
+                            <https://w3id.org/function/ontology#Parameter> ;
+                   <https://w3id.org/function/ontology#predicate> :currentValue ;
+                   <https://w3id.org/function/ontology#required> "false"^^xsd:boolean .
+
+
+###  http://expcps.link/vocab#DemandResponseCausality
+:DemandResponseCausality rdf:type owl:NamedIndividual ,
+                                  :Causality ;
+                         :source :FlexMessaging ;
+                         :target <http://expcps.link/expcps/property#ACTIVE-POWER-3P> ;
+                         rdfs:comment "change of consumption/production based on flexibility requests" .
+
+
+###  http://expcps.link/vocab#DerivativeDirectionChange
+:DerivativeDirectionChange rdf:type owl:NamedIndividual ,
+                                    <https://w3id.org/function/ontology#Function> ;
+                           <https://w3id.org/function/ontology#expects> :DerivativeDirectionChangeParamList .
+
+
+###  http://expcps.link/vocab#DerivativeDirectionChangeParamList
+:DerivativeDirectionChangeParamList rdf:type owl:NamedIndividual ,
+                                             :ParameterList ;
+                                    :hasParameter :DirectionParam ,
+                                                  :ThresholdParam ,
+                                                  :ValueSeriesParam .
+
+
+###  http://expcps.link/vocab#DirectionParam
+:DirectionParam rdf:type owl:NamedIndividual ,
+                         <https://w3id.org/function/ontology#Parameter> ;
+                <https://w3id.org/function/ontology#predicate> :signDirection ;
+                <https://w3id.org/function/ontology#required> "true"^^xsd:boolean .
+
+
+###  http://expcps.link/vocab#EVChargingStation
+:EVChargingStation rdf:type owl:NamedIndividual ;
+                   <http://www.w3.org/ns/ssn/hasProperty> <http://expcps.link/expcps/property#STATE-OF-CHARGE> .
+
+
+###  http://expcps.link/vocab#FlexMessaging
+:FlexMessaging rdf:type owl:NamedIndividual ,
+                        <http://www.w3.org/ns/sosa/ActuatableProperty> ,
+                        <http://www.w3.org/ns/sosa/ObservableProperty> ;
+               rdfs:comment "Actuation property which contains log actuation on Flex Communication channel (msg received, msg sent)" .
+
+
+###  http://expcps.link/vocab#FlexServer
+:FlexServer rdf:type owl:NamedIndividual ,
+                     :ApplicationServer ;
+            <http://www.w3.org/ns/ssn/hasProperty> :FlexMessaging ;
+            rdfs:comment "Application server which organize Flexibility communication channel" .
+
+
+###  http://expcps.link/vocab#GridConnector
+:GridConnector rdf:type owl:NamedIndividual ;
+               <http://www.w3.org/ns/ssn/hasProperty> <http://expcps.link/expcps/property#ACTIVE-POWER-3P> .
+
+
+###  http://expcps.link/vocab#LoadCausality
+:LoadCausality rdf:type owl:NamedIndividual ,
+                        :Causality ;
+               :context :ConnectedCondition ;
+               :source <http://expcps.link/expcps/property#ACTIVE-POWER-3P> ;
+               :target <http://expcps.link/expcps/property#LOADING> .
+
+
+###  http://expcps.link/vocab#LocalWeather
+:LocalWeather rdf:type owl:NamedIndividual ,
+                       :Weather .
+
+
+###  http://expcps.link/vocab#OperatorParam
+:OperatorParam rdf:type owl:NamedIndividual ,
+                        <https://w3id.org/function/ontology#Parameter> ;
+               <https://w3id.org/function/ontology#predicate> :thresholdOperator ;
+               <https://w3id.org/function/ontology#required> "true"^^xsd:boolean .
+
+
+###  http://expcps.link/vocab#OverloadAlarm
+:OverloadAlarm rdf:type owl:NamedIndividual ,
+                        :EventAnnotator ,
+                        <https://w3id.org/function/ontology#Execution> ;
+               :generates :OverloadEvent ;
+               :operatedOn <http://expcps.link/expcps/property#LOADING> ;
+               :numLastValues 1 ;
+               :thresholdOperator ">" ;
+               :thresholdValue .3 ;
+               <https://w3id.org/function/ontology#executes> :SimpleThreshold .
+
+
+###  http://expcps.link/vocab#OverloadEvent
+:OverloadEvent rdf:type owl:NamedIndividual .
+
+
+###  http://expcps.link/vocab#Precipitation
+:Precipitation rdf:type owl:NamedIndividual ,
+                        <http://www.w3.org/ns/sosa/ObservableProperty> .
+
+
+###  http://expcps.link/vocab#PreviousValueParam
+:PreviousValueParam rdf:type owl:NamedIndividual ,
+                             <https://w3id.org/function/ontology#Parameter> ;
+                    <https://w3id.org/function/ontology#predicate> :previousValue ;
+                    <https://w3id.org/function/ontology#required> "false"^^xsd:boolean .
+
+
+###  http://expcps.link/vocab#SPARQL
+:SPARQL rdf:type owl:NamedIndividual .
+
+
+###  http://expcps.link/vocab#SimpleThreshold
+:SimpleThreshold rdf:type owl:NamedIndividual ,
+                          <https://w3id.org/function/ontology#Function> ;
+                 <https://w3id.org/function/ontology#expects> :SimpleThresholdParamList .
+
+
+###  http://expcps.link/vocab#SimpleThresholdParamList
+:SimpleThresholdParamList rdf:type owl:NamedIndividual ,
+                                   :ParameterList ;
+                          :hasParameter :OperatorParam ,
+                                        :ThresholdParam ,
+                                        :ValueSeriesParam .
+
+
+###  http://expcps.link/vocab#SolarIrradiance
+:SolarIrradiance rdf:type owl:NamedIndividual ,
+                          <http://www.w3.org/ns/sosa/ObservableProperty> .
+
+
+###  http://expcps.link/vocab#SolarPanel
+:SolarPanel rdf:type owl:NamedIndividual ;
+            <http://www.w3.org/ns/ssn/hasProperty> <http://expcps.link/expcps/property#ACTIVE-POWER-3P> .
+
+
+###  http://expcps.link/vocab#Temperature
+:Temperature rdf:type owl:NamedIndividual ,
+                      <http://www.w3.org/ns/sosa/ActuatableProperty> ,
+                      <http://www.w3.org/ns/sosa/ObservableProperty> .
+
+
+###  http://expcps.link/vocab#ThresholdParam
+:ThresholdParam rdf:type owl:NamedIndividual ,
+                         <https://w3id.org/function/ontology#Parameter> ;
+                <https://w3id.org/function/ontology#predicate> :thresholdValue ;
+                <https://w3id.org/function/ontology#required> "true"^^xsd:boolean .
+
+
+###  http://expcps.link/vocab#Trafo
+:Trafo rdf:type owl:NamedIndividual ;
+       <http://www.w3.org/ns/ssn/hasProperty> <http://expcps.link/expcps/property#ACTIVE-POWER-3P> ,
+                                              <http://expcps.link/expcps/property#LOADING> .
+
+
+###  http://expcps.link/vocab#ValueChange
+:ValueChange rdf:type owl:NamedIndividual ,
+                      <https://w3id.org/function/ontology#Function> ;
+             <https://w3id.org/function/ontology#expects> :ValueChangeParamList .
+
+
+###  http://expcps.link/vocab#ValueChangeParamList
+:ValueChangeParamList rdf:type owl:NamedIndividual ,
+                               :ParameterList ;
+                      :hasParameter :CurrentValueParam ,
+                                    :PreviousValueParam ,
+                                    :ValueSeriesParam .
+
+
+###  http://expcps.link/vocab#ValueSeriesParam
+:ValueSeriesParam rdf:type owl:NamedIndividual ,
+                           <https://w3id.org/function/ontology#Parameter> ;
+                  <https://w3id.org/function/ontology#predicate> :values ;
+                  <https://w3id.org/function/ontology#required> "true"^^xsd:boolean .
+
+
+###  http://expcps.link/vocab#VoltageDrop
+:VoltageDrop rdf:type owl:NamedIndividual ,
+                      :EventAnnotator ,
+                      <https://w3id.org/function/ontology#Execution> ;
+             :generates :VoltageDropEvent ;
+             :operatedOn <http://expcps.link/expcps/property#VOLTAGE-3P> ;
+             :numLastValues 3 ;
+             :signDirection -1 ;
+             :thresholdValue 5 ;
+             <https://w3id.org/function/ontology#executes> :DerivativeDirectionChange .
+
+
+###  http://expcps.link/vocab#VoltageDropEvent
+:VoltageDropEvent rdf:type owl:NamedIndividual .
+
+
+###  http://expcps.link/vocab#Weather
+:Weather rdf:type owl:NamedIndividual ;
+         <http://www.w3.org/ns/ssn/hasProperty> :Precipitation ,
+                                                :SolarIrradiance ,
+                                                :Temperature ,
+                                                :WindSpeed .
+
+
+###  http://expcps.link/vocab#WindSpeed
+:WindSpeed rdf:type owl:NamedIndividual ,
+                    <http://www.w3.org/ns/sosa/ObservableProperty> .
+
+
+###  http://www.w3.org/ns/sosa/Actuation
+<http://www.w3.org/ns/sosa/Actuation> rdf:type owl:NamedIndividual .
+
+
+###  http://www.w3.org/ns/sosa/Actuator
+<http://www.w3.org/ns/sosa/Actuator> rdf:type owl:NamedIndividual ;
+                                     :produces <http://www.w3.org/ns/sosa/Actuation> .
+
+
+###  http://www.w3.org/ns/sosa/Observation
+<http://www.w3.org/ns/sosa/Observation> rdf:type owl:NamedIndividual .
+
+
+###  http://www.w3.org/ns/sosa/Sensor
+<http://www.w3.org/ns/sosa/Sensor> rdf:type owl:NamedIndividual ;
+                                   :produces <http://www.w3.org/ns/sosa/Observation> .
+
+
+###  https://pebbie.org/webid.ttl#me
+<https://pebbie.org/webid.ttl#me> rdf:type owl:NamedIndividual ,
+                                           <http://xmlns.com/foaf/0.1/Agent> ;
+                                  <http://xmlns.com/foaf/0.1/name> "Peb Ruswono Aryan"@en .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+:BlackoutEvent rdfs:comment "the event when electricity is not flowing in some areas of the grid"@en .
+
+
+:OverloadEvent rdfs:comment "the event when load limit (i.e. based on rating from manufacturer) of something (e.g. cable / trafo ) is exceeded"@en .
+
+
+:SPARQL rdfs:comment "uses SPARQL to formulate whether two devices' causality can be derived"@en .
+
+
+:currentValue <https://w3id.org/function/ontology#type> :JSONLiteral .
+
+
+###  Generated by the OWL API (version 5.1.14) https://github.com/owlcs/owlapi/

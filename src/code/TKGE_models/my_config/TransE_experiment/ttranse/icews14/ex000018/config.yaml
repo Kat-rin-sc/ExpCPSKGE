@@ -1,0 +1,206 @@
+console:
+  echo: true
+  format: {}
+  log_level: info
+  quiet: false
+dataset:
+  args: null
+  filter: false
+  folder: ./data/icews14_small
+  mapping: false
+  name: icews14
+  num_entities: -1
+  num_relations: -1
+  pickle: true
+  temporal:
+    float: false
+    index: true
+    resolution: day
+eval:
+  filter: time-aware
+  k:
+  - 1
+  - 3
+  - 10
+  ordering: descending
+  preference: optimistic
+hpo:
+  hyperparam:
+  - name: model.embedding.global.dim
+    type: choice
+    value_type: int
+    values:
+    - 1024
+    - 512
+    - 256
+    - 128
+    - 100
+    - 64
+  - name: train.regularizer.norm.type
+    type: choice
+    value_type: str
+    values:
+    - f2_regularize
+    - lambda3_regularize
+  - bounds:
+    - 0.0
+    - 0.1
+    - 0.01
+    name: train.regularizer.norm.weight
+    type: range
+    value_type: float
+  - bounds:
+    - 1.0e-07
+    - 0.01
+    name: train.optimizer.args.lr
+    type: range
+    value_type: float
+  - name: model.fusion.p
+    type: choice
+    value_type: float
+    values:
+    - 0.0
+    - 0.2
+    - 0.4
+    - 0.5
+    - 0.6
+  - name: task.reciprocal_training
+    type: choice
+    value_type: bool
+    values:
+    - true
+    - false
+  - name: train.loss.type
+    type: choice
+    value_type: str
+    values:
+    - binary_cross_entropy_loss
+    - cross_entropy_loss
+  - name: model.embedding.entity.pos_aware
+    type: choice
+    value_type: bool
+    values:
+    - true
+    - false
+  - name: model.embedding.global.init
+    type: choice
+    value_type: str
+    values:
+    - xavier_uniform
+    - xavier_normal
+  num_random_trials: 30
+  num_trials: 80
+  num_workers: -1
+model:
+  args: null
+  emb_dim: 128
+  embedding:
+    entity:
+      keys:
+        real:
+          dim: 160
+          init: xavier_uniform
+      pos_aware: true
+    global:
+      dim: 128
+      init: xavier_uniform
+    relation:
+      keys:
+        real:
+          dim: 160
+          init: xavier_uniform
+    temporal:
+      keys:
+        real:
+          dim: 160
+          init: xavier_uniform
+  fusion:
+    args: null
+    p: 0.6
+    target:
+    - rel+temp
+    - ent+temp
+    type: reproject_fusion
+  l1_flag: true
+  scorer:
+    inverse: true
+  transformation:
+    args: null
+    gamma: 100
+    p: 1
+    range: 10
+    type: translation_tf
+  type: ttranse
+negative_sampling:
+  args: null
+  as_matrix: true
+  filter: false
+  num_samples: 500
+  target: both
+  type: time_agnostic
+random_seed:
+  default: -1
+  numba: -1
+  numpy: -1
+  python: -1
+  torch: -1
+task:
+  device: cpu
+  folder: ./my_config/TransE_experiment
+  reciprocal_training: false
+  type: train
+train:
+  abort_on_nan: true
+  auto_correct: false
+  batch_size: 512
+  checkpoint:
+    every: 100
+    keep: 3
+  inplace_regularizer: null
+  loader:
+    drop_last: false
+    num_workers: 0
+    pin_memory: false
+    timeout: 0
+  loss:
+    args: null
+    type: cross_entropy_loss
+  lr_scheduler: ''
+  lr_scheduler_args:
+    +++: +++
+  max_epochs: 100
+  optimizer:
+    args:
+      lr: 0.00801124320768471
+    default:
+      args:
+        +++: +++
+      type: Adam
+    type: Adam
+  regularizer:
+    norm:
+      args: null
+      type: f2_regularize
+      weight: 0.03680558279156685
+  split: train
+  subbatch_adaptive: true
+  subbatch_size: -1
+  trace_level: epoch
+  type: negative_sampling
+  valid:
+    batch_size: 512
+    early_stopping:
+      early_stop: true
+      epochs: 50
+      metric_thresh: 0.2
+      patience: 30
+    every: 5
+    filter: time-aware
+    k:
+    - 1
+    - 3
+    - 10
+    ordering: optimistic
+    split: test
+    subbatch_size: -1
+  visualize_graph: false
