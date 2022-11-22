@@ -38,6 +38,7 @@ MODEL_NAME = "TransH"
 # In[ ]:
 
 
+# implementation of TransH
 """An implementation of TransH.
 There are errors caused when using the pykeen implementation of TransH, so I changed the implementation of the regularizer to run smoothly"""
 

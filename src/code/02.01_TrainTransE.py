@@ -119,7 +119,7 @@ result = hpo_pipeline(
 )
 
 # save the model
-result.save_to_directory('../models/' + MODEL_NAME +'_hpo_')
+result.save_to_directory('../models/' + MODEL_NAME +'_hpo')
 
 print("-------------------\n Successfully trained" + MODEL_NAME + '_hpo' + "\n-------------------")
 
