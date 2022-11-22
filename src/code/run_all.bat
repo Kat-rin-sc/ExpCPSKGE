@@ -1,17 +1,17 @@
 :: ## GraphDB needs to be open and containing the right files and graphs
 
 :: convert jupyter notebooks to .py files
-jupyter nbconvert --to script src/code/01_Preprocessing.ipynb
-jupyter nbconvert --to script src/code/02.01_TrainTransE.ipynb
-jupyter nbconvert --to script src/code/02.02_TrainComplEx.ipynb
-jupyter nbconvert --to script src/code/02.03_TrainTransH.ipynb
-jupyter nbconvert --to script src/code/02.04_TrainTTransE.ipynb
-jupyter nbconvert --to script src/code/03.1_Evaluation.ipynb
+jupyter nbconvert --to script 01.1_Preprocessing.ipynb
+jupyter nbconvert --to script 02.1_TrainTransE.ipynb
+jupyter nbconvert --to script 02.02_TrainComplEx.ipynb
+jupyter nbconvert --to script 02.03_TrainTransH.ipynb
+jupyter nbconvert --to script 02.04_TrainTTransE.ipynb
+jupyter nbconvert --to script 03.1_Evaluation.ipynb
 : 03.2_PerformanceMetrics is a jupyter notebook, which produces many charts to analyse model performance
 jupyter nbconvert --to script src/code/04_LinkPrediction.ipynb
 
 :: run preprocessing (needs to be run on local computer, where GraphDB is running)
-python src/code/01_Preprocessing.py
+python 01.1_Preprocessing.py
 
 if NOT ["%errorlevel%"]==["0"] pause
 
@@ -41,6 +41,8 @@ python tkge.py eval --ex ./ExpCPS_checkpoints/TTransE_ExpCPS_experiment/ttranse/
 
 python tkge.py hpo --config "./ExpCPS_config/TTransE_ExpCPSHPO.yaml"
 python tkge.py hpo --resume "./ExpCPS_config/TTransE_ExpCPSHPO.yaml"
+
+python tkge.py eval --ex ./ExpCPS_checkpoints/TTransE_ExpCPS_experiment_HPO/ttranse/ExpCPS/ex000001/trial17
 
 python tkge.py eval --ex ./ExpCPS_checkpoints/TTransE_ExpCPS_experiment_HPO_bestModel/ttranse/ExpCPS/ex000001
 

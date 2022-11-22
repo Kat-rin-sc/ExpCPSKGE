@@ -17,8 +17,17 @@ When conducting the next steps in order, the experiment should run through and t
 
 (optional: Transfer data and models to a GPU)
 
-2. Train models 
+2. Train and evaluate models (should be run on a GPU)
 	- run 02.01_TrainTransE.py
 	- run 02.02_TrainComplEx.py
 	- run 02.03_TrainTransH.py
-	- run 02.04 
+	- run 02.04_TrainTTransE.py
+	- run 3.1_Evaluation.py 
+
+3. Use models for Link Prediction
+	- run 04.1_LinkPrediction.py
+
+3. Analyse and Interpret model Performance, Link Prediction Results, etc. The results can be found in the following Jupyter Notebooks:
+	- 04.2_PredictionEvaluation.ipynb
+	- 04.3_AnalyseCausalities.ipynb
+	- ...
