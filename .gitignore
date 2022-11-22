@@ -6,4 +6,6 @@
 *.ckpt
 *.nq
 *.7z
+*.gz
+*.txt
 *Archive*
